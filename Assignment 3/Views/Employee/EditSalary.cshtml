@@ -1,0 +1,29 @@
+﻿@model Assignment_3.t_Salary
+
+@{
+    ViewBag.Title = "Edit Salary Record for " + ViewBag.Employee.EmpName;
+}
+
+<h2>Edit Salary Record for @ViewBag.Employee.EmpName</h2>
+
+@Html.ActionLink("Back to Salary Records", "Salary", new { id = ViewBag.Employee.EmployeeId }, new { @class = "btn btn-primary" })
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MonthName)
+        @Html.EditorFor(model => model.MonthName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.MonthName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Salary)
+        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Salary)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+}

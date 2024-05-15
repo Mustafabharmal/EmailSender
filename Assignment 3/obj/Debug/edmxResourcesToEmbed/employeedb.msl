@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DegreeModelStoreContainer" CdmEntityContainer="DegreeEntities">
+    <EntitySetMapping Name="SalaryAudits">
+      <EntityTypeMapping TypeName="DegreeModel.SalaryAudit">
+        <MappingFragment StoreEntitySet="SalaryAudit">
+          <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="DeletedSalary" ColumnName="DeletedSalary" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Employee">
+      <EntityTypeMapping TypeName="DegreeModel.t_Employee">
+        <MappingFragment StoreEntitySet="t_Employee">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_library">
+      <EntityTypeMapping TypeName="DegreeModel.t_library">
+        <MappingFragment StoreEntitySet="t_library">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Studentid" ColumnName="Studentid" />
+          <ScalarProperty Name="Bookname" ColumnName="Bookname" />
+          <ScalarProperty Name="Issuedate" ColumnName="Issuedate" />
+          <ScalarProperty Name="Returndate" ColumnName="Returndate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_MARKSHEET">
+      <EntityTypeMapping TypeName="DegreeModel.T_MARKSHEET">
+        <MappingFragment StoreEntitySet="T_MARKSHEET">
+          <ScalarProperty Name="MarksheetId" ColumnName="MarksheetId" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="marks" ColumnName="marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_Salary">
+      <EntityTypeMapping TypeName="DegreeModel.t_Salary">
+        <MappingFragment StoreEntitySet="t_Salary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Student">
+      <EntityTypeMapping TypeName="DegreeModel.T_Student">
+        <MappingFragment StoreEntitySet="T_Student">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="SemNo" ColumnName="SemNo" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_SUBJECT">
+      <EntityTypeMapping TypeName="DegreeModel.T_SUBJECT">
+        <MappingFragment StoreEntitySet="T_SUBJECT">
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_user">
+      <EntityTypeMapping TypeName="DegreeModel.t_user">
+        <MappingFragment StoreEntitySet="t_user">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeSalaryByParameter" FunctionName="DegreeModel.Store.GetEmployeeSalaryByParameter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DegreeModel.GetEmployeeSalaryByParameter_Result">
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEmployeeSalaryDetails" FunctionName="DegreeModel.Store.GetEmployeeSalaryDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DegreeModel.GetEmployeeSalaryDetails_Result">
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

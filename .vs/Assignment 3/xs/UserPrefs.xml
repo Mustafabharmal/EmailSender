@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{D9D4A54C-EC93-44AB-BB76-B6CD7756B5CE}|">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assignment 3/App_Start/RouteConfig.cs">
+    <Files>
+      <File FileName="Assignment 3/Models/EmailModel.cs" />
+      <File FileName="Assignment 3/Assignment 3.csproj" />
+      <File FileName="Assignment 3/Controllers/EmployeeController.cs" Line="15" Column="55" />
+      <File FileName="Assignment 3/Views/Captcha/Index.cshtml" />
+      <File FileName="Assignment 3/Views/Shared/_Layout.cshtml" Line="27" Column="22" />
+      <File FileName="Assignment 3/Controllers/CaptchaController.cs" />
+      <File FileName="Assignment 3/Models/Registration.cs" />
+      <File FileName="Assignment 3/CAPTCHAHelper.cs" />
+      <File FileName="Assignment 3/Web.config" Line="67" Column="300" />
+      <File FileName="Assignment 3/employeedb.edmx" Line="1" Column="1" />
+      <File FileName="Assignment 3/Controllers/SalaryController.cs" />
+      <File FileName="Assignment 3/Views/_ViewStart.cshtml" Line="1" Column="1" />
+      <File FileName="Assignment 3/Views/Web.config" Line="1" Column="1" />
+      <File FileName="Assignment 3/Views/Employee/Index.cshtml" Line="21" Column="30" />
+      <File FileName="Assignment 3/Models/EmployeeModel.cs" Line="3" Column="44" />
+      <File FileName="Assignment 3/App_Start/RouteConfig.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Assignment 3" expanded="True">
+            <Node name="Assignment 3" expanded="True">
+              <Node name="App_Start" expanded="True" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Assignment_2203 PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>

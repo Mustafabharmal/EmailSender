@@ -1,0 +1,29 @@
+﻿@model Assignment_3.Models.EmployeeSalaryModel
+@{
+    ViewBag.Title = "Result";
+}
+
+
+<h2>Employee Salary Calculation Result</h2>
+
+if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>Basic Salary</th>
+            <td>@Model.BasicSalary.ToString("C")</td>
+        </tr>
+        <tr>
+            <th>Leave Deduction</th>
+            <td>@Model.LeaveDeduction.ToString("C")</td>
+        </tr>
+        <tr>
+            <th>Overtime Earnings</th>
+            <td>@Model.OvertimeEarnings.ToString("C")</td>
+        </tr>
+        <tr>
+            <th>Total Salary</th>
+            <td>@Model.TotalSalary.ToString("C")</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Download Excel", "DownloadExcel", "Salary", Model, new { @class = "btn btn-success" })

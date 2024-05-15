@@ -1,0 +1,38 @@
+﻿@model Assignment_3.t_Salary
+
+@{
+    ViewBag.Title = "Delete Salary Record";
+}
+
+<h2>Delete Salary Record for @ViewBag.Employee.EmpName</h2>
+
+@Html.ActionLink("Back to Salary Records", "Salary", new { id = ViewBag.Employee.EmployeeId }, new { @class = "btn btn-primary" })
+
+@using (Html.BeginForm("DeleteSalaryConfirmed", "Employee", new { id = Model.Id }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MonthName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MonthName)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="form-group">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Salary)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Salary)
+            </dd>
+        </dl>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Delete Salary Record</button>
+}

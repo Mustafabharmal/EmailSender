@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DegreeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SalaryAudit">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="DeletedSalary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DeletedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="255" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <EntityType Name="t_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentid" Type="int" />
+          <Property Name="Bookname" Type="nvarchar" MaxLength="255" />
+          <Property Name="Issuedate" Type="datetime" />
+          <Property Name="Returndate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_MARKSHEET">
+          <Key>
+            <PropertyRef Name="MarksheetId" />
+          </Key>
+          <Property Name="MarksheetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="marks" Type="decimal" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityType Name="t_Salary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" />
+          <Property Name="MonthName" Type="varchar" MaxLength="3" />
+          <Property Name="Salary" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="T_Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sname" Type="nvarchar" MaxLength="50" />
+          <Property Name="SemNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_SUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="isactive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__t_library__Stude__2D27B809">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="0..1" />
+          <End Role="t_library" Type="Self.t_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_library">
+              <PropertyRef Name="Studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_MARKSHE__Stude__2E1BDC42">
+          <End Role="T_Student" Type="Self.T_Student" Multiplicity="0..1" />
+          <End Role="T_MARKSHEET" Type="Self.T_MARKSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_MARKSHEET">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_MARKSHE__Subje__2F10007B">
+          <End Role="T_SUBJECT" Type="Self.T_SUBJECT" Multiplicity="0..1" />
+          <End Role="T_MARKSHEET" Type="Self.T_MARKSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_SUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="T_MARKSHEET">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_Salary__EmpId__4E88ABD4">
+          <End Role="t_Employee" Type="Self.t_Employee" Multiplicity="0..1" />
+          <End Role="t_Salary" Type="Self.t_Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="t_Salary">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetEmployeeSalaryByParameter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="MonthName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeeSalaryDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DegreeModelStoreContainer">
+          <EntitySet Name="SalaryAudit" EntityType="Self.SalaryAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Employee" EntityType="Self.t_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_library" EntityType="Self.t_library" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_MARKSHEET" EntityType="Self.T_MARKSHEET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Salary" EntityType="Self.t_Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Student" EntityType="Self.T_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SUBJECT" EntityType="Self.T_SUBJECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__t_library__Stude__2D27B809" Association="Self.FK__t_library__Stude__2D27B809">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_library" EntitySet="t_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_MARKSHE__Stude__2E1BDC42" Association="Self.FK__T_MARKSHE__Stude__2E1BDC42">
+            <End Role="T_Student" EntitySet="T_Student" />
+            <End Role="T_MARKSHEET" EntitySet="T_MARKSHEET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_MARKSHE__Subje__2F10007B" Association="Self.FK__T_MARKSHE__Subje__2F10007B">
+            <End Role="T_SUBJECT" EntitySet="T_SUBJECT" />
+            <End Role="T_MARKSHEET" EntitySet="T_MARKSHEET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_Salary__EmpId__4E88ABD4" Association="Self.FK__t_Salary__EmpId__4E88ABD4">
+            <End Role="t_Employee" EntitySet="t_Employee" />
+            <End Role="t_Salary" EntitySet="t_Salary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DegreeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SalaryAudit">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="DeletedSalary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="t_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="t_Salary" Relationship="Self.FK__t_Salary__EmpId__33D4B598" FromRole="t_Employee" ToRole="t_Salary" />
+        </EntityType>
+        <EntityType Name="t_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentid" Type="Int32" />
+          <Property Name="Bookname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Issuedate" Type="DateTime" Precision="3" />
+          <Property Name="Returndate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="t_user" Relationship="Self.FK__t_library__Stude__2D27B809" FromRole="t_library" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="T_MARKSHEET">
+          <Key>
+            <PropertyRef Name="MarksheetId" />
+          </Key>
+          <Property Name="MarksheetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="SubjectID" Type="Int32" />
+          <Property Name="marks" Type="Decimal" Precision="3" Scale="2" />
+          <NavigationProperty Name="T_Student" Relationship="Self.FK__T_MARKSHE__Stude__2E1BDC42" FromRole="T_MARKSHEET" ToRole="T_Student" />
+          <NavigationProperty Name="T_SUBJECT" Relationship="Self.FK__T_MARKSHE__Subje__2F10007B" FromRole="T_MARKSHEET" ToRole="T_SUBJECT" />
+        </EntityType>
+        <EntityType Name="t_Salary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" />
+          <Property Name="MonthName" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="t_Employee" Relationship="Self.FK__t_Salary__EmpId__33D4B598" FromRole="t_Salary" ToRole="t_Employee" />
+        </EntityType>
+        <EntityType Name="T_Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="T_MARKSHEET" Relationship="Self.FK__T_MARKSHE__Stude__2E1BDC42" FromRole="T_Student" ToRole="T_MARKSHEET" />
+        </EntityType>
+        <EntityType Name="T_SUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="T_MARKSHEET" Relationship="Self.FK__T_MARKSHE__Subje__2F10007B" FromRole="T_SUBJECT" ToRole="T_MARKSHEET" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isactive" Type="Boolean" />
+          <NavigationProperty Name="t_library" Relationship="Self.FK__t_library__Stude__2D27B809" FromRole="t_user" ToRole="t_library" />
+        </EntityType>
+        <Association Name="FK__t_Salary__EmpId__33D4B598">
+          <End Role="t_Employee" Type="Self.t_Employee" Multiplicity="0..1" />
+          <End Role="t_Salary" Type="Self.t_Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="t_Salary">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_library__Stude__2D27B809">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="0..1" />
+          <End Role="t_library" Type="Self.t_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_library">
+              <PropertyRef Name="Studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_MARKSHE__Stude__2E1BDC42">
+          <End Role="T_Student" Type="Self.T_Student" Multiplicity="0..1" />
+          <End Role="T_MARKSHEET" Type="Self.T_MARKSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="T_MARKSHEET">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__T_MARKSHE__Subje__2F10007B">
+          <End Role="T_SUBJECT" Type="Self.T_SUBJECT" Multiplicity="0..1" />
+          <End Role="T_MARKSHEET" Type="Self.T_MARKSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_SUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="T_MARKSHEET">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DegreeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SalaryAudits" EntityType="Self.SalaryAudit" />
+          <EntitySet Name="t_Employee" EntityType="Self.t_Employee" />
+          <EntitySet Name="t_library" EntityType="Self.t_library" />
+          <EntitySet Name="T_MARKSHEET" EntityType="Self.T_MARKSHEET" />
+          <EntitySet Name="t_Salary" EntityType="Self.t_Salary" />
+          <EntitySet Name="T_Student" EntityType="Self.T_Student" />
+          <EntitySet Name="T_SUBJECT" EntityType="Self.T_SUBJECT" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" />
+          <AssociationSet Name="FK__t_Salary__EmpId__33D4B598" Association="Self.FK__t_Salary__EmpId__33D4B598">
+            <End Role="t_Employee" EntitySet="t_Employee" />
+            <End Role="t_Salary" EntitySet="t_Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_library__Stude__2D27B809" Association="Self.FK__t_library__Stude__2D27B809">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_library" EntitySet="t_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_MARKSHE__Stude__2E1BDC42" Association="Self.FK__T_MARKSHE__Stude__2E1BDC42">
+            <End Role="T_Student" EntitySet="T_Student" />
+            <End Role="T_MARKSHEET" EntitySet="T_MARKSHEET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__T_MARKSHE__Subje__2F10007B" Association="Self.FK__T_MARKSHE__Subje__2F10007B">
+            <End Role="T_SUBJECT" EntitySet="T_SUBJECT" />
+            <End Role="T_MARKSHEET" EntitySet="T_MARKSHEET" />
+          </AssociationSet>
+          <FunctionImport Name="GetEmployeeSalaryByParameter" ReturnType="Collection(DegreeModel.GetEmployeeSalaryByParameter_Result)">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="MonthName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeeSalaryDetails" ReturnType="Collection(DegreeModel.GetEmployeeSalaryDetails_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetEmployeeSalaryByParameter_Result">
+          <Property Type="String" Name="EmpName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MonthName" Nullable="true" MaxLength="3" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeeSalaryDetails_Result">
+          <Property Type="String" Name="EmpName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="MonthName" Nullable="true" MaxLength="3" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DegreeModelStoreContainer" CdmEntityContainer="DegreeEntities">
+          <EntitySetMapping Name="SalaryAudits">
+            <EntityTypeMapping TypeName="DegreeModel.SalaryAudit">
+              <MappingFragment StoreEntitySet="SalaryAudit">
+                <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DeletedSalary" ColumnName="DeletedSalary" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Employee">
+            <EntityTypeMapping TypeName="DegreeModel.t_Employee">
+              <MappingFragment StoreEntitySet="t_Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_library">
+            <EntityTypeMapping TypeName="DegreeModel.t_library">
+              <MappingFragment StoreEntitySet="t_library">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Studentid" ColumnName="Studentid" />
+                <ScalarProperty Name="Bookname" ColumnName="Bookname" />
+                <ScalarProperty Name="Issuedate" ColumnName="Issuedate" />
+                <ScalarProperty Name="Returndate" ColumnName="Returndate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_MARKSHEET">
+            <EntityTypeMapping TypeName="DegreeModel.T_MARKSHEET">
+              <MappingFragment StoreEntitySet="T_MARKSHEET">
+                <ScalarProperty Name="MarksheetId" ColumnName="MarksheetId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="marks" ColumnName="marks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Salary">
+            <EntityTypeMapping TypeName="DegreeModel.t_Salary">
+              <MappingFragment StoreEntitySet="t_Salary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Student">
+            <EntityTypeMapping TypeName="DegreeModel.T_Student">
+              <MappingFragment StoreEntitySet="T_Student">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sname" ColumnName="sname" />
+                <ScalarProperty Name="SemNo" ColumnName="SemNo" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SUBJECT">
+            <EntityTypeMapping TypeName="DegreeModel.T_SUBJECT">
+              <MappingFragment StoreEntitySet="T_SUBJECT">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubName" ColumnName="SubName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="DegreeModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeSalaryByParameter" FunctionName="DegreeModel.Store.GetEmployeeSalaryByParameter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DegreeModel.GetEmployeeSalaryByParameter_Result">
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeSalaryDetails" FunctionName="DegreeModel.Store.GetEmployeeSalaryDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DegreeModel.GetEmployeeSalaryDetails_Result">
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

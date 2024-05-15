@@ -1,0 +1,16 @@
+﻿@model Assignment_3.Models.Registration
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "Captcha", new { enctype = "multipart/form-data", id = "Captcha" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.Captcha("Try other", "Captcha", 6,"Is requre fild",true)
+        <br />
+        <p>@ViewBag.ErrorMessage</p>
+        <p><input type="submit" value="Send" /></p>
+    </fieldset>
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Assignment_3.Models.EmployeeModel>
+
+@{
+    ViewBag.Title = "Employee List";
+}
+
+<h2>Employee List</h2>
+
+<table class="table">
+    <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.EmployeeId</td>
+            <td>@employee.EmpName</td>
+            <td>@employee.Age</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = employee.EmployeeId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Delete", new { id = employee.EmployeeId }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Show Salary", "Salary", new { id = employee.EmployeeId }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Add Employee", "Create", null, new { @class = "btn btn-success" })

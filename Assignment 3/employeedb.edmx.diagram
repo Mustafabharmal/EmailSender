@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="524ddc9588c54c9f8853977191235c92" Name="Diagram1">
+        <EntityTypeShape EntityType="DegreeModel.SalaryAudit" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.t_Employee" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.t_library" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.T_MARKSHEET" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.t_Salary" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.T_Student" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.T_SUBJECT" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DegreeModel.t_user" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="DegreeModel.FK__t_Salary__EmpId__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="DegreeModel.FK__t_library__Stude__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="DegreeModel.FK__T_MARKSHE__Stude__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="DegreeModel.FK__T_MARKSHE__Subje__2F10007B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

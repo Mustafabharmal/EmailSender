@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Calculator";
+}
+
+<h2>Calculator</h2>
+
+<div class="calculator">
+    <form method="post" action="@Url.Action("Calculate", "Calculator")">
+        <div class="calculator-input">
+            <input type="text" name="expression" id="inputField" required>
+        </div>
+        <div class="calculator-grid">
+            <button type="button" onclick="clearInput()">AC</button>
+            <button type="button" onclick="deleteLastCharacter()">DEL</button>
+            <button type="button" onclick="toggleSign()">+/-</button>
+            <button type="button" onclick="appendToInput('/')">/</button>
+            <button type="button" onclick="appendToInput('7')">7</button>
+            <button type="button" onclick="appendToInput('8')">8</button>
+            <button type="button" onclick="appendToInput('9')">9</button>
+            <button type="button" onclick="appendToInput('*')">*</button>
+            <button type="button" onclick="appendToInput('4')">4</button>
+            <button type="button" onclick="appendToInput('5')">5</button>
+            <button type="button" onclick="appendToInput('6')">6</button>
+            <button type="button" onclick="appendToInput('-')">-</button>
+            <button type="button" onclick="appendToInput('1')">1</button>
+            <button type="button" onclick="appendToInput('2')">2</button>
+            <button type="button" onclick="appendToInput('3')">3</button>
+            <button type="button" onclick="appendToInput('+')">+</button>
+            <button type="button" onclick="calculatePercentage()">%</button>
+            <button type="button" onclick="appendToInput('0')">0</button>
+            <button type="button" onclick="appendToInput('.')">.</button>
+            <button type="submit" class="equals-button">=</button>
+        </div>
+    </form>
+
+    @if (ViewBag.Result != null)
+    {
+        <script>
+            var input = document.getElementById("inputField");
+            input.value = @ViewBag.Result;
+        </script>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="calculator-error">
+            Error: @ViewBag.ErrorMessage
+        </div>
+    }
+</div>
+
+<script>
+    function setvalue(value) {
+        var input = document.getElementById("inputField");
+        input.value=value;
+    }
+    function appendToInput(value) {
+        var input = document.getElementById("inputField");
+        input.value += value;
+    }
+
+    function clearInput() {
+        var input = document.getElementById("inputField");
+        input.value = "";
+    }
+
+    function deleteLastCharacter() {
+        var input = document.getElementById("inputField");
+        input.value = input.value.slice(0, -1);
+    }
+
+    function toggleSign() {
+        var input = document.getElementById("inputField");
+        if (input.value.startsWith("-")) {
+            input.value = input.value.substr(1);
+        } else {
+            input.value = "-" + input.value;
+        }
+    }
+
+    function calculatePercentage() {
+        var input = document.getElementById("inputField");
+        input.value = parseFloat(input.value) / 100;
+    }
+</script>
+
+
+<style>
+    .calculator {
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .calculator-input {
+        margin: 10px 0;
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 5px;
+    }
+
+        .calculator-grid button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+    .equals-button {
+        grid-column: span 4;
+        background-color: #ff6600;
+        color: white;
+    }
+
+        .equals-button:hover {
+            background-color: #cc5500;
+        }
+</style>

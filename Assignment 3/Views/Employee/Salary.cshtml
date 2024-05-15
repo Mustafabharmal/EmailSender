@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Assignment_3.t_Salary>
+
+@{
+    ViewBag.Title = "Salary Records";
+}
+
+<h2>Salary Records for @ViewBag.Employee.EmpName</h2>
+
+@Html.ActionLink("Back to Employee List", "Index", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Add Salary Record", "AddSalary", new { empId = ViewBag.Employee.EmployeeId }, new { @class = "btn btn-success" })
+
+<table class="table">
+    <tr>
+        <th>Salary ID</th>
+        <th>Month Name</th>
+        <th>Salary</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var salaryRecord in Model)
+    {
+        <tr>
+            <td>@salaryRecord.Id</td>
+            <td>@salaryRecord.MonthName</td>
+            <td>@salaryRecord.Salary</td>
+            <td>
+                @Html.ActionLink("Edit", "EditSalary", new { id = salaryRecord.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "DeleteSalary", new { id = salaryRecord.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
